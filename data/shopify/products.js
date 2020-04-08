@@ -49,7 +49,28 @@ module.exports = {
                         {
                             "price": {
                                 "currency_code": "USD",
-                                "amount": "199.00"
+                                "amount": "199.99"
+                            },
+                            "compare_at_price": null
+                        },
+                        {
+                            "price": {
+                                "currency_code": "EUR",
+                                "amount": "158.95"
+                            },
+                            "compare_at_price": null
+                        },
+                        {
+                            "price": {
+                                "currency_code": "GBP",
+                                "amount": "143.00"
+                            },
+                            "compare_at_price": null
+                        },
+                        {
+                            "price": {
+                                "currency_code": "JPY",
+                                "amount": "22400"
                             },
                             "compare_at_price": null
                         }
@@ -123,7 +144,28 @@ module.exports = {
                         {
                             "price": {
                                 "currency_code": "USD",
-                                "amount": "199.00"
+                                "amount": "199.99"
+                            },
+                            "compare_at_price": null
+                        },
+                        {
+                            "price": {
+                                "currency_code": "EUR",
+                                "amount": "158.95"
+                            },
+                            "compare_at_price": null
+                        },
+                        {
+                            "price": {
+                                "currency_code": "GBP",
+                                "amount": "143.00"
+                            },
+                            "compare_at_price": null
+                        },
+                        {
+                            "price": {
+                                "currency_code": "JPY",
+                                "amount": "22400"
                             },
                             "compare_at_price": null
                         }

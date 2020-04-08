@@ -2,7 +2,7 @@ const helpers = require('./helpers');
 
 // Shopify
 //console.log( helpers.getData("shopify", "shop", "shop") );
-console.log(helpers.getProductShopify("shopify", "products", "products"));
+//console.log(helpers.getProductShopify("shopify", "products", "products"))
 
 // Magento 2: https://devdocs.magento.com/swagger/
 //console.log(helpers.getProductMagento2("magento2", "products", "products"));
