@@ -1,4 +1,4 @@
-{
+module.exports = {
     "shop": {
 			"id": 690933842,
 			"name": "Apple Computers",

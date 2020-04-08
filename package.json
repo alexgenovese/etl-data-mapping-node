@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fs": "0.0.1-security",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "node-json-transform": "^1.0.20"
   }
 }

@@ -1,18 +1,17 @@
-const DataTransform = require("node-json-transform").DataTransform;
-const fs = require('fs');
+const helpers = require('./helpers');
 
-const _data_shopify_order = JSON.parse(fs.readFileSync("./data/shopify/shop.js", 'utf8'));
-const _data_shopify_map_order = JSON.parse(fs.readFileSync("./schemas/shopify/shop.js", 'utf8'));
+// Shopify
+//console.log( helpers.getData("shopify", "shop", "shop") );
+console.log(helpers.getProductShopify("shopify", "products", "products"));
 
-var shop_owner_map = {
-	key: "store",
-	item: {
-		name: "shop_owner",
-	}
-}
+// Magento 2: https://devdocs.magento.com/swagger/
+//console.log(helpers.getProductMagento2("magento2", "products", "products"));
 
+// Magento 1: 
+//console.log(helpers.getProductMagento1("magento1", "products", "products"));
 
-var dataTransform = DataTransform(_data_shopify_order, _data_shopify_map_order);
-var result = dataTransform.transform();
-console.log(result);
-
+// Stripe
+//console.log( helpers.getData("stripe", "subscriptions", "subscriptions") );
+//console.log( helpers.getData("stripe", "subscription", "subscription") );
+//console.log( helpers.getData("stripe", "subscription", "plan") );
+//console.log( helpers.getData("stripe", "invoices", "invoices") );
