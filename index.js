@@ -6,6 +6,7 @@ const helpers = require('./helpers');
 
 // Magento 2: https://devdocs.magento.com/swagger/
 //console.log(helpers.getProductMagento2("magento2", "products", "products"));
+console.log(helpers.getCustomerMagento2("magento2", "customers", "customers"));
 
 // Magento 1: 
 //console.log(helpers.getProductMagento1("magento1", "products", "products"));
