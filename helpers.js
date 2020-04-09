@@ -492,5 +492,46 @@ module.exports = {
 
     },
 
+    /**
+     * 
+     * @param {String} _data_model 
+     * @param {String} _data_filename 
+     * @param {String} _schema_filename 
+     * 
+     * @output {Object}
+     */
+    getOrderShopify: function( _data_model, _data_filename, _schema_filename ){
+        if(!_data_model || !_data_filename || !_schema_filename ) return false
+
+        let _data = require("./data/"+_data_model+"/"+_data_filename+".js")
+        let _map = require("./schemas/"+_schema_filename+".js")
+
+        if( !_data || !_map ) return 'Missing files'
+
+        _data = transform.transformOrderShopify( _data )
+
+        _map['operate'] = [
+            {
+                'run': function(ary) { 
+                    return DataTransform({list:ary}, products).transform()
+                }, 
+                'on': 'products'
+            }
+        ]
+
+        let products = {
+            'list': 'list',
+            'item' : {
+                "product_id" : "product_id",
+                "sku" : "sku",
+                "name" : "name",
+                "price" :  "price"
+            }
+        }
+        
+        return DataTransform(_data, _map).transform()
+
+    },
+
 
 }

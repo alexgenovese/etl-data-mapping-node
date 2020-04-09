@@ -4,6 +4,7 @@ const helpers = require('./helpers');
 //console.log( helpers.getStoreShopify("shopify", "shop", "shop") );
 //console.log(helpers.getProductShopify("shopify", "products", "products"))
 //console.log(helpers.getCustomerShopify("shopify", "customers", "customers"))
+//console.log(helpers.getOrderShopify("shopify", "orders", "orders"))
 
 // Magento 2: https://devdocs.magento.com/swagger/
 //console.log( helpers.getStoreMagento2("magento2", "shop", "shop") );

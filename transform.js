@@ -164,7 +164,7 @@ module.exports = {
      * @output {Object}
      */
     transformOrderMagento2: function ( _json ){
-        if(!_json) new Error('transformCustomerMagento2 - No data passed')
+        if(!_json) new Error('transformOrderMagento2 - No data passed')
         
         _json = _json.renameProperty('items', 'orders')
         _json.orders.forEach(function(val, key){
@@ -181,6 +181,24 @@ module.exports = {
 
         return _json
     },
+
+    /**
+     * 
+     * @param {Object} _json 
+     * @output {Object}
+     */
+    transformOrderShopify: function( _json ){
+        if(!_json) new Error('transformOrderShopify - No data passed')
+        if(!_json.hasOwnProperty('orders')) new Error('transformOrderShopify - Wrong data passed')
+
+        _json.orders.forEach(function(val, key){
+            _json.orders[key]['customer_id'] = val.customer.id
+            _json.orders[key]['email'] = val.customer.email
+            _json.orders[key]['firstname'] = val.customer.first_name
+            _json.orders[key]['lastname'] = val.customer.last_name
+        })
+        return _json
+    }
 
 }
 
