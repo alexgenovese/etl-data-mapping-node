@@ -7,6 +7,29 @@ module.exports = {
      * @param {Object} _json 
      * @output {Object} 
      */
+    transformStoreMagento2: function( _json ){
+        if(!_json) new Error('transformMagento1 - No data passed')
+        if( !(_json.length > 0) ) new Error('transformStoreShopify - Wrong data passed')
+
+        let _new = {'store': null };
+        _new.store = _json[0];
+
+        _new = _new.renameProperty('id', 'no_website_id')
+        _new = _new.renameProperty('website_id', 'id')
+        _new = _new.renameProperty('locale', 'primary_locale')
+        _new = _new.renameProperty('default_display_currency_code', 'currency')
+        _new = _new.renameProperty('timezone', 'iana_timezone')
+        _new = _new.renameProperty('base_link_url', 'domain')
+
+        return _new
+
+    },
+
+    /**
+     * 
+     * @param {Object} _json 
+     * @output {Object} 
+     */
     transformProductMagento1: function (_json){
         if(!_json) new Error('transformMagento1 - No data passed')
         if(!_json.hasOwnProperty('products')) new Error('transformMagento1 - Wrong data passed')
@@ -62,7 +85,6 @@ module.exports = {
      */
     transformCustomerMagento1: function( _json ){
         if(!_json) new Error('transformCustomerMagento2 - No data passed')
-        if(!_json.hasOwnProperty('items')) new Error('transformCustomerMagento2 - Wrong data passed')
         
         let _new = { customers: null };
         _new.customers = _json.deleteFirstLevelKeys()
@@ -105,11 +127,62 @@ module.exports = {
 
         return _json
 
-    }
+    },
+
+    /**
+     * 
+     * @param {Object} _json 
+     * @output {Object}
+     */
+    transformOrderMagento1: function ( _json ){
+        if(!_json) new Error('transformCustomerMagento2 - No data passed')
+        
+        let _new = {orders: []}
+        _json = _json.deleteFirstLevelKeys()
+        for (let [key, value] of Object.entries(_json)) {
+            value.renameProperty('firstname', 'addresses.firstname')
+            value.renameProperty('lastname', 'addresses.lastname')
+            value.renameProperty('base_currency_code', 'currency')
+            value.renameProperty('total_paid', 'total_price')
+            value.renameProperty('base_subtotal_incl_tax', 'subtotal_price')
+            value.renameProperty('base_discount_amount', 'total_discounts')
+            value.renameProperty('order_items', 'line_items')
+            
+            if( typeof value.line_items.length === 'undefined' ){
+                let _temp = value.line_items
+                value.line_items = []
+                value.line_items.push(_temp.data_item)
+            }
+            _new.orders.push(value)
+        }
+        return _new
+    },
+
+    /**
+     * 
+     * @param {Object} _json 
+     * @output {Object}
+     */
+    transformOrderMagento2: function ( _json ){
+        if(!_json) new Error('transformCustomerMagento2 - No data passed')
+        
+        _json = _json.renameProperty('items', 'orders')
+        _json.orders.forEach(function(val, key){
+            _json.orders[key].renameProperty('entity_id', 'id')
+            _json.orders[key].renameProperty('customer_email', 'email')
+            _json.orders[key].renameProperty('customer_firstname', 'firstname')
+            _json.orders[key].renameProperty('customer_lastname', 'lastname')
+            _json.orders[key].renameProperty('order_currency_code', 'currency')
+            _json.orders[key].renameProperty('total_paid', 'total_price')
+            _json.orders[key].renameProperty('subtotal', 'subtotal_price')
+            _json.orders[key].renameProperty('base_discount_amount', 'total_discounts')
+            _json.orders[key].renameProperty('items', 'line_items')
+        })
+
+        return _json
+    },
 
 }
-
-
 
 Object.prototype.deleteFirstLevelKeys = function () {
     let _t = [];

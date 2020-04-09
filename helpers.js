@@ -31,6 +31,62 @@ module.exports = {
      * 
      * @output {Object}
      */
+    getStoreShopify: function (_data_model, _data_filename, _schema_filename ){
+        if(!_data_model || !_data_filename || !_schema_filename ) return false
+
+        const _data = require("./data/"+_data_model+"/"+_data_filename+".js");
+        let _map = require("./schemas/"+_schema_filename+".js");
+        if( !_data || !_map ) return 'Missing files';
+
+        _map['operate'] = [
+            {
+                'run' : function(val){
+                    return 'shopify'
+                },
+                'on' : 'type'
+            }
+        ]
+
+        return DataTransform(_data, _map).transform();
+    },
+
+    /**
+     * 
+     * @param {String} _data_model 
+     * @param {String} _data_filename 
+     * @param {String} _schema_filename 
+     * 
+     * @output {Object}
+     */
+    getStoreMagento2: function (_data_model, _data_filename, _schema_filename ){
+        if(!_data_model || !_data_filename || !_schema_filename ) return false
+
+        let _data = require("./data/"+_data_model+"/"+_data_filename+".js");
+        let _map = require("./schemas/"+_schema_filename+".js");
+        if( !_data || !_map ) return 'Missing files';
+
+        _data = transform.transformStoreMagento2( _data )
+
+        _map['operate'] = [
+            {
+                'run' : function(val){
+                    return 'magento2'
+                },
+                'on' : 'type'
+            }
+        ]
+
+        return DataTransform(_data, _map).transform();
+    },
+
+    /**
+     * 
+     * @param {String} _data_model 
+     * @param {String} _data_filename 
+     * @param {String} _schema_filename 
+     * 
+     * @output {Object}
+     */
     getProductMagento1: function(_data_model, _data_filename, _schema_filename ){
         if(!_data_model || !_data_filename || !_schema_filename ) return false
 
@@ -346,7 +402,95 @@ module.exports = {
 
         return DataTransform(_data, _map).transform()
 
-    }
+    },
+
+    /**
+     * 
+     * @param {String} _data_model 
+     * @param {String} _data_filename 
+     * @param {String} _schema_filename 
+     * 
+     * @output {Object}
+     */
+    getOrderMagento1: function( _data_model, _data_filename, _schema_filename ){
+        if(!_data_model || !_data_filename || !_schema_filename ) return false
+
+        let _data = require("./data/"+_data_model+"/"+_data_filename+".js")
+        let _map = require("./schemas/"+_schema_filename+".js")
+
+        if( !_data || !_map ) return 'Missing files'
+
+        _data = transform.transformOrderMagento1( _data )
+
+        _map['operate'] = [
+            {
+                'run': function(ary) { 
+                    return DataTransform({list:ary}, product).transform()
+                }, 
+                'on': 'products'
+            }
+        ]
+
+        let product = {
+            "list" : "list",
+            'item' : {
+                "product_id" : "",
+                "sku" : "sku",
+                "name" : "",
+                "price" :  "price"
+            }
+        }
+
+        return DataTransform(_data, _map).transform()
+
+    },
+
+    /**
+     * 
+     * @param {String} _data_model 
+     * @param {String} _data_filename 
+     * @param {String} _schema_filename 
+     * 
+     * @output {Object}
+     */
+    getOrderMagento2: function( _data_model, _data_filename, _schema_filename ){
+        if(!_data_model || !_data_filename || !_schema_filename ) return false
+
+        let _data = require("./data/"+_data_model+"/"+_data_filename+".js")
+        let _map = require("./schemas/"+_schema_filename+".js")
+
+        if( !_data || !_map ) return 'Missing files'
+
+        _data = transform.transformOrderMagento2( _data )
+
+        _map['operate'] = [
+            {
+                'run': function(ary) { 
+                    return DataTransform({list:ary}, products).transform()
+                }, 
+                'on': 'products'
+            },
+            {
+                'run' : function(val) {
+                    return moment(val).format()
+                },
+                'on' : 'created_at'
+            }
+        ]
+
+        let products = {
+            'list': 'list',
+            'item' : {
+                "product_id" : "product_id",
+                "sku" : "sku",
+                "name" : "name",
+                "price" :  "price"
+            }
+        }
+
+        return DataTransform(_data, _map).transform()
+
+    },
 
 
 }
