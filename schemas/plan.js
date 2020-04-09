@@ -1,4 +1,5 @@
-// GET /v1/subscriptions/:id
+// GET /v1/plans
+
 module.exports = {
     "key": "subscription",
     "item" : {

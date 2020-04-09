@@ -1,3 +1,5 @@
+// GET /v1/subscription
+
 const moment = require('moment');
 
 module.exports = {

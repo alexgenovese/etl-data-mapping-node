@@ -1,4 +1,4 @@
-// GET /v1/user/
+// GET /v1/customers
 
 module.exports = {
     "list": "customers",
@@ -7,6 +7,9 @@ module.exports = {
         "last_name" : "lastname",
         "email" : "email",
         "gender" : "gender",
+        "accepts_marketing" : "accepts_marketing",
+        "address" : "address",
+        "status" : "status",
         "created_at" : "created_at"
     }
 }

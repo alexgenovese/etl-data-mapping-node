@@ -1,4 +1,5 @@
-// GET /api/rest/products
+// GET /v1/products
+
 module.exports = {
     "list": "products",
     "item": {

@@ -1,5 +1,4 @@
-// https://shopify.dev/docs/admin-api/rest/reference/store-properties/shop
-// GET /admin/api/2020-04/shop.json
+// GET /v1/shop
 
 module.exports = {
 	"key": "store",

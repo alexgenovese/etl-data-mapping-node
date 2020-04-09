@@ -17,7 +17,7 @@ module.exports = {
             "default_billing": "string",
             "default_shipping": "string",
             "confirmation": "string",
-            "created_at": "string",
+            "created_at": "2012-03-22 14:15:54",
             "updated_at": "string",
             "created_in": "string",
             "dob": "string",

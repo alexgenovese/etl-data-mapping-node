@@ -1,4 +1,14 @@
+/*
 
+GET /customers
+
+Authentication: Admin
+URL Structure: http://magentohost/api/rest/customers
+Description: Allows you to retrieve the list of existing customers.
+Notes:: Only Admin user can retrieve the list of customers with all their attributes.
+https://devdocs.magento.com/guides/m1x/api/rest/Resources/resource_customers.html#RESTAPI-Resource-Customers-HTTPMethod-GET-customers
+
+*/
 
 module.exports = {
     "2": {
