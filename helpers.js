@@ -528,10 +528,9 @@ module.exports = {
                 "price" :  "price"
             }
         }
-        
+
         return DataTransform(_data, _map).transform()
 
     },
-
 
 }

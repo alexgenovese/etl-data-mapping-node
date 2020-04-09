@@ -202,14 +202,20 @@ module.exports = {
 
 }
 
+/**
+ * Delete first level keys
+ */
 Object.prototype.deleteFirstLevelKeys = function () {
     let _t = [];
     for (let [key, value] of Object.entries(this)) {
         _t.push(value);
     }
     return _t
-};
+}
 
+/**
+ * Rename key 
+ */
 Object.prototype.renameProperty = function (oldName, newName) {
     // Do nothing if the names are the same
     if (oldName === newName) {
@@ -222,4 +228,4 @@ Object.prototype.renameProperty = function (oldName, newName) {
         delete this[oldName];
     }
     return this;
-};
+}
