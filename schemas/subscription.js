@@ -11,6 +11,7 @@ module.exports = {
         "trial_start" : "trial_start",
         "trial_end" : "trial_end",
         "created_at" : "start_date", 
+        "stripe_customer_id" : "customer",
         "stripe_id": "id",
         "stripe_plan_id": "plan.id",
         "stripe_billing_cycle"  : "billing_cycle_anchor",
