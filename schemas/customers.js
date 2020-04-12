@@ -7,9 +7,9 @@ module.exports = {
         "last_name" : "lastname",
         "email" : "email",
         "gender" : "gender",
-        "accepts_marketing" : "accepts_marketing",
         "address" : "address",
         "status" : "status",
+        "accepts_marketing" : "accepts_marketing",
         "created_at" : "created_at"
     }
 }
