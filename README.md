@@ -26,6 +26,7 @@ You need to de-comment the line you should run the ETL and then type:
 
 ```
 node index
+```
 
 ## Built With
 
